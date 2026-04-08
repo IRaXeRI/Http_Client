@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import pl.lodz.uni.labmate_ui.Application;
-import pl.lodz.uni.labmate_ui.ServerCommunication.ExServerComm;
+import pl.network.httpclient.HelloApplication;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -26,7 +25,7 @@ public class SceneLoader implements ISceneLoader {
     private Stage prepStage(String path) throws ExSceneLoader {
         Stage stage = new Stage();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(path));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(path));
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().addAll();
             stage.setScene(scene);
@@ -39,7 +38,7 @@ public class SceneLoader implements ISceneLoader {
     @Override
     public Scene loadScene(String path) throws ExSceneLoader {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(path));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(path));
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().addAll();
             return scene;
@@ -58,7 +57,7 @@ public class SceneLoader implements ISceneLoader {
     @Override
     public Stage loadStage(String path, boolean resizable, String logoPath) throws ExSceneLoader {
         Stage stage = loadStage(path, resizable);
-        stage.getIcons().add(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(logoPath))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(HelloApplication.class.getResourceAsStream(logoPath))));
         return stage;
     }
 
@@ -71,7 +70,7 @@ public class SceneLoader implements ISceneLoader {
 
     @Override
     public Parent loadParent(String path) throws ExSceneLoader {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(path));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(path));
         try {
             return fxmlLoader.load();
         } catch (IOException e) {
